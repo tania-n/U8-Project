@@ -99,7 +99,6 @@ public class Picture extends SimplePicture
       for(Pixel pixelObj : rowArray){ 
         pixelObj.setRed(0); 
         pixelObj.setGreen(0);  
-        //pixelObj.setBlue(pixelObj.getBlue()); 
       }
     }
   } 
@@ -108,9 +107,9 @@ public class Picture extends SimplePicture
     Pixel[][] pixels = this.getPixels2D(); 
     for(Pixel[] rowArray : pixels){ 
       for(Pixel pixelObj : rowArray){ 
-        pixelObj.setRed(255); 
-        pixelObj.setGreen(255); 
-        pixelObj.setBlue(255); 
+        pixelObj.setRed(255 - pixelObj.getRed()); 
+        pixelObj.setGreen(255 - pixelObj.getGreen()); 
+        pixelObj.setBlue(255 - pixelObj.getBlue()); 
       }
     }
   } 
@@ -128,13 +127,13 @@ public class Picture extends SimplePicture
     }
   } 
 
-  public void fixUnderWater(){ //not finished
+  public void fixUnderWater(){ 
     Pixel[][] pixels = this.getPixels2D(); 
     for(Pixel[] rowArray : pixels){ 
       for(Pixel pixelObj : rowArray){ 
-        pixelObj.setRed(0); 
-        //pixelObj.setGreen(170); 
-        //pixelObj.setBlue(150); 
+        pixelObj.setRed(pixelObj.getRed() - 90); 
+        pixelObj.setGreen(pixelObj.getGreen() - 70); 
+        pixelObj.setBlue(pixelObj.getBlue() - 60); 
       }
     }
   }
@@ -192,13 +191,10 @@ public class Picture extends SimplePicture
       for(int col = 0; col < width / 2; col++){ 
         leftPixel = pixels[row][col];  
         rightPixel = pixels[row][width - 1 - col];  
-        int blue = rightPixel.getBlue(); 
-        int red = rightPixel.getRed(); 
-        int green = rightPixel.getGreen();  
+        Color colors = rightPixel.getColor(); 
         rightPixel.setColor(leftPixel.getColor());  
-        leftPixel.setBlue(blue); 
-        leftPixel.setRed(red); 
-        leftPixel.setGreen(green);
+        leftPixel.setColor(colors); 
+
       }
     }
   } 
@@ -226,16 +222,41 @@ public class Picture extends SimplePicture
       for(int col = 0; col < pixels[0].length; col++){ 
         bottomPixel = pixels[row][col]; 
         topPixel = pixels[height - 1 - row][col]; 
-        int blue = topPixel.getBlue(); 
+        /*int blue = topPixel.getBlue(); 
         int red = topPixel.getRed(); 
-        int green = topPixel.getGreen(); 
+        int green = topPixel.getGreen(); */
+        Color colors = topPixel.getColor(); 
         topPixel.setColor(bottomPixel.getColor()); 
-        bottomPixel.setBlue(blue); 
+        bottomPixel.setColor(colors); 
+        /*bottomPixel.setBlue(blue); 
         bottomPixel.setRed(red); 
-        bottomPixel.setGreen(green); 
+        bottomPixel.setGreen(green); */
       }
     }
   } 
+
+  public void mirrorArms(){ 
+    int mirrorPoint = 190; 
+    Pixel leftPixel = null; 
+    Pixel rightPixel = null; 
+    Pixel[][] pixels = this.getPixels2D(); 
+
+    for(int row = 155; row < mirrorPoint; row++){ 
+      for(int col = 100; col < 170; col++){ 
+        leftPixel = pixels[row][col]; 
+        rightPixel = pixels[mirrorPoint - row + mirrorPoint][col]; 
+        rightPixel.setColor(leftPixel.getColor()); 
+      }
+    } 
+    mirrorPoint = 195;
+    for(int row = 165; row < mirrorPoint; row++){ 
+      for(int col = 230; col < 300; col++){ 
+        leftPixel = pixels[row][col]; 
+        rightPixel = pixels[mirrorPoint - row + mirrorPoint][col]; 
+        rightPixel.setColor(leftPixel.getColor()); 
+      }
+    } 
+  }
 
   public void mirrorGull(){ 
     int mirrorPoint = 350; 
