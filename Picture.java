@@ -194,7 +194,7 @@ public class Picture extends SimplePicture
         Color colors = rightPixel.getColor(); 
         rightPixel.setColor(leftPixel.getColor());  
         leftPixel.setColor(colors); 
-
+        // switch right and left 
       }
     }
   } 
@@ -230,7 +230,8 @@ public class Picture extends SimplePicture
         bottomPixel.setColor(colors); 
         /*bottomPixel.setBlue(blue); 
         bottomPixel.setRed(red); 
-        bottomPixel.setGreen(green); */
+        bottomPixel.setGreen(green); */ 
+        //switch top and bottom 
       }
     }
   } 
