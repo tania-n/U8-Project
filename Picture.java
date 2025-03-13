@@ -133,6 +133,7 @@ public class Picture extends SimplePicture
     }
   } 
 
+  // makes fish in water image easier to see 
   public void fixUnderWater(){ 
     Pixel[][] pixels = this.getPixels2D(); 
     for(Pixel[] rowArray : pixels){ 
