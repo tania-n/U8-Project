@@ -93,6 +93,7 @@ public class Picture extends SimplePicture
     }
   } 
 
+  // sets red and green to 0 
   public void keepOnlyBlue(){ 
     Pixel[][] pixels = this.getPixels2D(); 
     for(Pixel[]  rowArray : pixels){ 
@@ -107,6 +108,8 @@ public class Picture extends SimplePicture
     Pixel[][] pixels = this.getPixels2D(); 
     for(Pixel[] rowArray : pixels){ 
       for(Pixel pixelObj : rowArray){ 
+        // substracts the red, green, and blue values from 255 
+        // sets red, green, and blue to the next values 
         pixelObj.setRed(255 - pixelObj.getRed()); 
         pixelObj.setGreen(255 - pixelObj.getGreen()); 
         pixelObj.setBlue(255 - pixelObj.getBlue()); 
@@ -119,7 +122,10 @@ public class Picture extends SimplePicture
     for(Pixel[] rowArray : pixels){  
       int temp = 0; 
       for(Pixel pixelObj : rowArray){ 
+        // adds up the values of red, green, and blue and divides by 3 
+        // sets value to temp 
         temp = (pixelObj.getRed() + pixelObj.getGreen() + pixelObj.getBlue()) / 3; 
+        // sets red, green, and blue to the new value 
         pixelObj.setRed(temp); 
         pixelObj.setGreen(temp); 
         pixelObj.setBlue(temp); 
@@ -131,6 +137,7 @@ public class Picture extends SimplePicture
     Pixel[][] pixels = this.getPixels2D(); 
     for(Pixel[] rowArray : pixels){ 
       for(Pixel pixelObj : rowArray){ 
+        // decreases red, green, and blue 
         pixelObj.setRed(pixelObj.getRed() - 90); 
         pixelObj.setGreen(pixelObj.getGreen() - 70); 
         pixelObj.setBlue(pixelObj.getBlue() - 60); 
@@ -182,6 +189,7 @@ public class Picture extends SimplePicture
     }
   } 
 
+   // Mirrors picture from right to left 
   public void mirrorVerticalRightToLeft(){ 
     Pixel[][] pixels = this.getPixels2D(); 
     int width = pixels[0].length; 
@@ -190,15 +198,14 @@ public class Picture extends SimplePicture
     for(int row = 0; row < pixels.length; row++){ 
       for(int col = 0; col < width / 2; col++){ 
         leftPixel = pixels[row][col];  
-        rightPixel = pixels[row][width - 1 - col];  
-        Color colors = rightPixel.getColor(); 
-        rightPixel.setColor(leftPixel.getColor());  
-        leftPixel.setColor(colors); 
-        // switch right and left 
+        rightPixel = pixels[row][width - 1 - col];   
+        leftPixel.setColor(rightPixel.getColor()); 
+
       }
     }
   } 
 
+  // Mirrors picture from top to bottom 
   public void mirrorHorizontal(){ 
     Pixel[][] pixels = this.getPixels2D();
     Pixel bottomPixel = null;
@@ -213,6 +220,7 @@ public class Picture extends SimplePicture
     }
   } 
 
+  // Mirrors picture from bottom to top 
   public void mirrorHorizontalBotToTop(){ 
     Pixel[][] pixels = this.getPixels2D();
     Pixel bottomPixel = null;
@@ -222,27 +230,20 @@ public class Picture extends SimplePicture
       for(int col = 0; col < pixels[0].length; col++){ 
         bottomPixel = pixels[row][col]; 
         topPixel = pixels[height - 1 - row][col]; 
-        /*int blue = topPixel.getBlue(); 
-        int red = topPixel.getRed(); 
-        int green = topPixel.getGreen(); */
-        Color colors = topPixel.getColor(); 
-        topPixel.setColor(bottomPixel.getColor()); 
-        bottomPixel.setColor(colors); 
-        /*bottomPixel.setBlue(blue); 
-        bottomPixel.setRed(red); 
-        bottomPixel.setGreen(green); */ 
-        //switch top and bottom 
+        bottomPixel.setColor(topPixel.getColor()); 
       }
     }
   } 
 
+  // Mirrors arms on snowman 
   public void mirrorArms(){ 
     int mirrorPoint = 190; 
     Pixel leftPixel = null; 
     Pixel rightPixel = null; 
     Pixel[][] pixels = this.getPixels2D(); 
 
-    for(int row = 155; row < mirrorPoint; row++){ 
+    // Loop2 from 155 to 189
+    for(int row = 155; row < mirrorPoint; row++){  
       for(int col = 100; col < 170; col++){ 
         leftPixel = pixels[row][col]; 
         rightPixel = pixels[mirrorPoint - row + mirrorPoint][col]; 
@@ -250,6 +251,7 @@ public class Picture extends SimplePicture
       }
     } 
     mirrorPoint = 195;
+    // Loops from 165 to 194
     for(int row = 165; row < mirrorPoint; row++){ 
       for(int col = 230; col < 300; col++){ 
         leftPixel = pixels[row][col]; 
@@ -259,6 +261,7 @@ public class Picture extends SimplePicture
     } 
   }
 
+  // Mirrors the seagull so theres two in the picture 
   public void mirrorGull(){ 
     int mirrorPoint = 350; 
     Pixel leftPixel = null; 
@@ -273,7 +276,8 @@ public class Picture extends SimplePicture
       }
     }
   }
-
+  
+  // Mirrors a square part of the picture from bottom left to top right 
   public void mirrorDiagonal(){ 
     Pixel[][] pixels = this.getPixels2D();
     Pixel bottomPixel = null;
